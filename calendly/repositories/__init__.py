@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from calendly.entities import CalendlyEntity
 from typing import Optional
 from datetime import datetime
+from calendly.misc.constants import DATE_TIME_FORMAT
 
 class CalendlyRepository(ABC):
     path_to_data_dir = None
@@ -59,6 +60,6 @@ class CalendlyRepository(ABC):
 
     @classmethod
     def _pre_process_before_add(cls, entity: CalendlyEntity):
-        entity.created_at = datetime.utcnow()
+        entity.created_at = datetime.strptime(datetime.utcnow().strftime(DATE_TIME_FORMAT), DATE_TIME_FORMAT)
         entity.created_by = "system"
 
