@@ -1,0 +1,13 @@
+[project]
+name = "calendly"
+description = "Dummy calendly app."
+version = "0.0.1"
+dependencies = [
+    "flask==3.0.0",
+    "pytz==2023.3.post1",
+]
+
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"

@@ -1,0 +1,116 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyArgumentListInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyAttributeOutsideInitInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyBroadExceptionInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyComparisonWithNoneInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyMissingTypeHintsInspection" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <value>
+          <list size="3">
+            <item index="0" class="java.lang.String" itemvalue="django" />
+            <item index="1" class="java.lang.String" itemvalue="asn1crypto" />
+            <item index="2" class="java.lang.String" itemvalue="oscrypto" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E722" />
+          <option value="E302" />
+          <option value="E128" />
+          <option value="E127" />
+          <option value="E117" />
+          <option value="W291" />
+          <option value="E262" />
+          <option value="W293" />
+          <option value="E231" />
+          <option value="E741" />
+          <option value="E303" />
+          <option value="E712" />
+          <option value="E225" />
+          <option value="E222" />
+          <option value="E265" />
+          <option value="E122" />
+          <option value="E266" />
+          <option value="E251" />
+          <option value="E124" />
+          <option value="E261" />
+          <option value="E203" />
+          <option value="E201" />
+          <option value="E202" />
+          <option value="E402" />
+          <option value="W606" />
+          <option value="E713" />
+          <option value="E301" />
+          <option value="E701" />
+          <option value="E125" />
+          <option value="E111" />
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N803" />
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPropertyDefinitionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyProtectedMemberInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyRedundantParenthesesInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PySetFunctionToLiteralInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="id" />
+          <option value="zip" />
+          <option value="type" />
+          <option value="file" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingNamesInspection" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="PySingleQuotedDocstringInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyTypeCheckerInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnnecessaryBackslashInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="django_mongoengine.fields.StringField" />
+          <option value="django_mongoengine.fields.EmbeddedDocumentField" />
+          <option value="django_mongoengine.fields.BooleanField" />
+          <option value="django_mongoengine.fields.ReferenceField" />
+          <option value="django_mongoengine.fields.IntField" />
+          <option value="django_mongoengine.fields.CachedReferenceField" />
+          <option value="django_mongoengine.fields.DateTimeField" />
+          <option value="django_mongoengine.fields.DecimalField" />
+          <option value="django_mongoengine.fields.DictField" />
+          <option value="django_mongoengine.fields.EmbeddedDocumentListField" />
+          <option value="django_mongoengine.fields.ListField" />
+          <option value="django_mongoengine.fields.ObjectIdField" />
+          <option value="django_mongoengine.fields.URLField" />
+          <option value="django_mongoengine.fields.UUIDField" />
+          <option value="django_mongoengine.fields.DynamicField" />
+          <option value="django_mongoengine.fields.FloatField" />
+          <option value="six.moves" />
+          <option value="django_mongoengine.fields.LongField" />
+          <option value="django_mongoengine.fields.FileField" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnusedLocalInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+      <option name="processCode" value="true" />
+      <option name="processLiterals" value="true" />
+      <option name="processComments" value="true" />
+    </inspection_tool>
+  </profile>
+</component>
