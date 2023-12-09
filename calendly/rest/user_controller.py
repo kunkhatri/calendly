@@ -11,6 +11,14 @@ class UserRestController(CalendlyRestInterface):
     def __init__(self):
         self.user_service: CalendlyService = ServiceFactory.create(USER_SERVICE_KEY)
 
+    def add_user(self, request) -> dict:
+        if not request.data:
+            raise BadRequestException("Invalid request, no data provided to add user.")
+
+        request_body = json.loads(request.data)
+        response = self.user_service.add_user(request_body)
+        return response
+
     def get_availability(self, user_id, request) -> dict:
         timezone = request.args.get("timezone")
         # default to today
@@ -30,7 +38,6 @@ class UserRestController(CalendlyRestInterface):
             raise BadRequestException("Invalid request, no availability provided.")
 
         request_body = json.loads(request.data)
-        print("request_body: ", request_body)
         if "availability_slots" not in request_body:
             raise BadRequestException("Invalid request, no availability provided.")
 

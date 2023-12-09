@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from calendly.entities import CalendlyEntity
 from typing import Optional
+from datetime import datetime
 
 class CalendlyRepository(ABC):
     path_to_data_dir = None
@@ -37,7 +38,7 @@ class CalendlyRepository(ABC):
         pass
 
     @abstractmethod
-    def add(self, entity: CalendlyEntity):
+    def add(self, entity: CalendlyEntity) -> CalendlyEntity:
         pass
 
     @abstractmethod
@@ -55,3 +56,9 @@ class CalendlyRepository(ABC):
     @abstractmethod
     def update_in_bulk(self, entity: CalendlyEntity) -> CalendlyEntity:
         pass
+
+    @classmethod
+    def _pre_process_before_add(cls, entity: CalendlyEntity):
+        entity.created_at = datetime.utcnow()
+        entity.created_by = "system"
+

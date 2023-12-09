@@ -7,13 +7,16 @@ from calendly.misc.exceptions import ObjectNotFoundException
 from calendly.utils.datetime import tz_str_to_tz_obj
 from calendly.dtos.availability_config import AvailabilityConfig, PerDateAvailabilityConfig, PatternBasedAvailabilityConfig
 from calendly.entities.user_hourly_slot_availability import UserHourlySlotAvailability
-from collections import defaultdict
 
 
 class UserAvailabilityService(CalendlyService):
     def __init__(self):
         self.user_repo = RepositoryFactory.create(USER_REPOSITORY_KEY)
         self.user_hourly_slot_availability_repo = RepositoryFactory.create(USER_HOURLY_SLOT_AVAILABILITY_REPOSITORY_KEY)
+
+    def add_user(self, data: dict) -> dict:
+        user = self.user_repo.add(self.user_repo.to_entity(data))
+        return user.to_dict()
 
     def get_availability(
         self, user_id: str, user_availability_filter: UserAvailabilityFilter, timezone: Optional[str] = None

@@ -1,6 +1,6 @@
 from calendly.misc.exceptions import ObjectNotFoundException, BadRequestException
 from calendly import app
-from flask import request, jsonify
+from flask import request, jsonify, Response
 from calendly.factories.controller_factory import ControllerFactory
 from calendly.misc.constants import USER_CONTROLLER_KEY
 
@@ -9,9 +9,13 @@ from calendly.misc.constants import USER_CONTROLLER_KEY
 def hello():
     return "<h1>Hi, I'm Calendly!</h1>"
 
+@app.route("/user", methods=["POST"])
+def add_user():
+    controller = ControllerFactory.create(USER_CONTROLLER_KEY)
+    return jsonify(controller.add_user(request))
 
 @app.route("/user/<user_id>/get_availability", methods=["GET"])
-def get_availability(user_id):
+def get_availability(user_id: str):
     """
     query_params:
         tz: timezone
@@ -35,7 +39,7 @@ def get_availability(user_id):
     return jsonify(controller.get_availability(user_id, request))
 
 @app.route("/user/<user_id>/set_availability", methods=["POST"])
-def set_availability(user_id):
+def set_availability(user_id: str):
     """
     request payload:
         timezone
@@ -60,6 +64,10 @@ def set_availability(user_id):
     """
     controller = ControllerFactory.create(USER_CONTROLLER_KEY)
     return jsonify(controller.set_availability(user_id, request))
+
+@app.route("/user/<user_id1>/remove_availability", methods=["POST"])
+def remove_availability(user_id: str):
+    return Response("Not implemented.", status=501)
 
 @app.route("/user/<user_id1>/overlapping_slots/<user_id2>", methods=["GET"])
 def overlapping_available_slots(user_id1, user_id2):

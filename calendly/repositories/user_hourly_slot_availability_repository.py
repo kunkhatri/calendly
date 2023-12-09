@@ -128,17 +128,17 @@ class UserHourlySlotAvailabilityRepository(CalendlyRepository):
 
     @classmethod
     def _pre_process_before_add(cls, entity: UserHourlySlotAvailability):
-        entity.id = entity.user_id + "slot" + floor(datetime.timestamp(datetime.utcnow()))
-        entity.created_at = datetime.utcnow()
+        super(UserHourlySlotAvailabilityRepository, cls)._pre_process_before_add(entity)
+        entity.id = entity.user_id + "slot" + str(floor(datetime.timestamp(datetime.utcnow())))
 
-    def add(self, entity: UserHourlySlotAvailability):
+    def add(self, entity: UserHourlySlotAvailability) -> UserHourlySlotAvailability:
         file_content = read_data_from_file(self.path_to_data_dir)
         objs = json.loads(file_content)
         self._pre_process_before_add(entity)
         objs.append(entity.to_dict())
 
         overwrite_data_to_file(self.path_to_data_dir, json.dumps(objs))
-
+        return entity
 
     def add_in_bulk(self, entities: list[UserHourlySlotAvailability]):
         file_content = read_data_from_file(self.path_to_data_dir)
@@ -152,14 +152,14 @@ class UserHourlySlotAvailabilityRepository(CalendlyRepository):
 
     @classmethod
     def to_entity(cls, obj) -> UserHourlySlotAvailability:
-        created_at = None if not obj["created_at"] or obj["created_at"] == "None" else datetime.strptime(obj["created_at"], DATE_TIME_FORMAT)
-        updated_at = None if not obj["updated_at"] or obj["updated_at"] == "None" else datetime.strptime(obj["updated_at"], DATE_TIME_FORMAT)
+        created_at = None if not obj.get("created_at") or obj.get("created_at") == "None" else datetime.strptime(obj["created_at"], DATE_TIME_FORMAT)
+        updated_at = None if not obj.get("updated_at") or obj.get("updated_at") == "None" else datetime.strptime(obj["updated_at"], DATE_TIME_FORMAT)
         return UserHourlySlotAvailability(
-            id=obj["id"],
+            id=obj.get("id"),
             created_at=created_at,
             updated_at=updated_at,
-            created_by=obj["created_by"],
-            last_updated_by=obj["last_updated_by"],
+            created_by=obj.get("created_by"),
+            last_updated_by=obj.get("last_updated_by"),
             user_id=obj["user_id"],
             date=datetime.strptime(obj["date"], DATE_FORMAT).date(),
             slot=obj["slot"],

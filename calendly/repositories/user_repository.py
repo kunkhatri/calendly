@@ -4,9 +4,10 @@ from calendly.entities.datetime import Weekday
 import os
 from typing import Optional
 import json
-from calendly.utils.datetime import read_data_from_file
+from calendly.utils.datetime import read_data_from_file, overwrite_data_to_file
 from calendly.misc.constants import DATE_TIME_FORMAT
 from datetime import datetime
+from math import floor
 
 class UserRepository(CalendlyRepository):
     path_to_data_dir = os.path.join("calendly", "dummy_db", "users.json")
@@ -42,20 +43,27 @@ class UserRepository(CalendlyRepository):
         """
         pass
 
-    def add(self, entity: User):
-        pass
+    def add(self, entity: User) -> User:
+        file_content = read_data_from_file(self.path_to_data_dir)
+        objs = json.loads(file_content)
+        self._pre_process_before_add(entity)
+        objs.append(entity.to_dict())
+        overwrite_data_to_file(self.path_to_data_dir, json.dumps(objs))
+        return entity
 
     def add_in_bulk(self, entities: list[User]):
         pass
 
     @classmethod
     def to_entity(cls, obj) -> User:
+        created_at = None if not obj.get("created_at") or obj.get("created_at") == "None" else datetime.strptime(obj["created_at"], DATE_TIME_FORMAT)
+        updated_at = None if not obj.get("updated_at") or obj.get("updated_at") == "None" else datetime.strptime(obj["updated_at"], DATE_TIME_FORMAT)
         return User(
-            id=obj["id"],
-            created_at=datetime.strptime(obj["created_at"], DATE_TIME_FORMAT),
-            updated_at=datetime.strptime(obj["updated_at"], DATE_TIME_FORMAT),
-            created_by=obj["created_by"],
-            last_updated_by=obj["last_updated_by"],
+            id=obj.get("id"),
+            created_at=created_at,
+            updated_at=updated_at,
+            created_by=obj.get("created_by"),
+            last_updated_by=obj.get("last_updated_by"),
             name=obj["name"],
             organization=obj["organization"],
             timezone=obj["timezone"],
@@ -70,3 +78,8 @@ class UserRepository(CalendlyRepository):
 
     def update_in_bulk(self, entity: User) -> User:
         pass
+
+    @classmethod
+    def _pre_process_before_add(cls, entity: User):
+        super(UserRepository, cls)._pre_process_before_add(entity)
+        entity.id = "user" + str(floor(datetime.timestamp(datetime.utcnow())))
