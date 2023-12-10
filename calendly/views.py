@@ -90,3 +90,6 @@ def overlapping_available_slots(user_id1, user_id2):
     controller = ControllerFactory.create(USER_CONTROLLER_KEY)
     return jsonify(controller.overlapping_available_slots(user_id1, user_id2, request))
 
+@users_bp.route("/user/<user_id1>/book_slot", methods=["POST"])
+def book_slot(user_id: str):
+    return Response("Not implemented.", status=501)
