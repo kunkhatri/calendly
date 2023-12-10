@@ -1,20 +1,20 @@
-from calendly.misc.exceptions import ObjectNotFoundException, BadRequestException
-from calendly import app
-from flask import request, jsonify, Response
+from flask import request, jsonify, Response, Blueprint
 from calendly.factories.controller_factory import ControllerFactory
 from calendly.misc.constants import USER_CONTROLLER_KEY
 
-@app.route("/hello")
-@app.route("/", methods=["GET"])
+users_bp = Blueprint('users', __name__)
+
+@users_bp.route("/hello")
+@users_bp.route("/", methods=["GET"])
 def hello():
     return "<h1>Hi, I'm Calendly!</h1>"
 
-@app.route("/user", methods=["POST"])
+@users_bp.route("/user", methods=["POST"])
 def add_user():
     controller = ControllerFactory.create(USER_CONTROLLER_KEY)
     return jsonify(controller.add_user(request))
 
-@app.route("/user/<user_id>/get_availability", methods=["GET"])
+@users_bp.route("/user/<user_id>/get_availability", methods=["GET"])
 def get_availability(user_id: str):
     """
     query_params:
@@ -38,7 +38,7 @@ def get_availability(user_id: str):
     controller = ControllerFactory.create(USER_CONTROLLER_KEY)
     return jsonify(controller.get_availability(user_id, request))
 
-@app.route("/user/<user_id>/set_availability", methods=["POST"])
+@users_bp.route("/user/<user_id>/set_availability", methods=["POST"])
 def set_availability(user_id: str):
     """
     request payload:
@@ -65,11 +65,11 @@ def set_availability(user_id: str):
     controller = ControllerFactory.create(USER_CONTROLLER_KEY)
     return jsonify(controller.set_availability(user_id, request))
 
-@app.route("/user/<user_id1>/remove_availability", methods=["POST"])
+@users_bp.route("/user/<user_id1>/remove_availability", methods=["POST"])
 def remove_availability(user_id: str):
     return Response("Not implemented.", status=501)
 
-@app.route("/user/<user_id1>/overlapping_slots/<user_id2>", methods=["GET"])
+@users_bp.route("/user/<user_id1>/overlapping_slots/<user_id2>", methods=["GET"])
 def overlapping_available_slots(user_id1, user_id2):
     """
     query params:
@@ -90,13 +90,3 @@ def overlapping_available_slots(user_id1, user_id2):
     controller = ControllerFactory.create(USER_CONTROLLER_KEY)
     return jsonify(controller.overlapping_available_slots(user_id1, user_id2, request))
 
-
-######## exception handlers #################
-
-@app.errorhandler(ObjectNotFoundException)
-def handle_not_found(e):
-    return "Not found!", 404
-
-@app.errorhandler(BadRequestException)
-def handle_bad_request(e):
-    return "Bad request!", 400

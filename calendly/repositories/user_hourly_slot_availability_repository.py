@@ -10,7 +10,7 @@ from math import floor
 
 
 class UserHourlySlotAvailabilityRepository(CalendlyRepository):
-    path_to_data_dir = os.path.join("calendly", "dummy_db", "users_slots.json")
+    path_to_data_dir = os.path.join(os.getcwd(), "dummy_db", "users_slots.json")
 
     def get_by_id(self, id: str) -> Optional[UserHourlySlotAvailability]:
         file_content = read_data_from_file(self.path_to_data_dir)

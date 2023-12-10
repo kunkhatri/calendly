@@ -10,7 +10,7 @@ from datetime import datetime
 from math import floor
 
 class UserRepository(CalendlyRepository):
-    path_to_data_dir = os.path.join("calendly", "dummy_db", "users.json")
+    path_to_data_dir = os.path.join(os.getcwd(), "dummy_db", "users.json")
 
     def get_by_id(self, id: str) -> Optional[User]:
         file_content = read_data_from_file(self.path_to_data_dir)
