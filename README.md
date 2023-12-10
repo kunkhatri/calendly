@@ -51,3 +51,11 @@ filter schema:
   type: NAME
   value: TODAY | TOMORROW | CURRENT_WEEK | NEXT_WEEK | CURRENT_MONTH
 ```
+### Book Available Slots (To be implemented)
+```
+path: POST /user/<user_id1>/book_slots
+```
+### Remove Available Slots (To be implemented)
+```
+path: POST /user/<user_id1>/remove_availability
+```
